@@ -4,10 +4,10 @@ class Palindromo:
         self.palidromo1 = []
         self.result = []
 
-    def pegaPalavras(self):
+    def __pegaPalavras__(self):
         self.palavras = input().split()
 
-    def verificaPalindromo(self, inicio, fim, palavra):
+    def __verificaPalindromo__(self, inicio, fim, palavra):
         palavra_ordem_certa = palavra[inicio:fim]
         palavra_invertida = palavra_ordem_certa[::-1]
         if palavra_ordem_certa == palavra_invertida:
@@ -15,17 +15,17 @@ class Palindromo:
 
         return False
 
-    def armazenaPalindromo(self, inicio, fim, palavra):
-        if palindromo := self.verificaPalindromo(inicio, fim, palavra):
+    def __armazenaPalindromo__(self, inicio, fim, palavra):
+        if palindromo := self.__verificaPalindromo__(inicio, fim, palavra):
             self.palidromo1.append(palindromo)
 
-    def encontraTodosOsPalindromoNaPalavra(self,pos):
+    def __encontraTodosOsPalindromoNaPalavra__(self, pos):
         len_palavra = len(self.palavras[pos])
         for i in range(len_palavra):
             for j in range(i + 3, len_palavra + 1):
-                self.armazenaPalindromo(i,j,self.palavras[pos])
+                self.__armazenaPalindromo__(i, j, self.palavras[pos])
 
-    def verificaSeTemIguais(self):
+    def __verificaSeTemIguais__(self):
         new_palindromo = []
         for i, tupla1 in enumerate(self.palidromo1):
             is_equal = False
@@ -36,7 +36,7 @@ class Palindromo:
                 new_palindromo.append(tupla1)
         self.palidromo1 = new_palindromo
 
-    def verificaSeTemContidos(self):
+    def __verificaSeTemContidos__(self):
         new_palindromo = []
         for i, tupla1 in enumerate(self.palidromo1):
             is_contido = False
@@ -48,10 +48,10 @@ class Palindromo:
                 new_palindromo.append(tupla1)
         self.palidromo1 = new_palindromo
 
-    def verificaSeEh2Palindromo(self, pos):
-        self.encontraTodosOsPalindromoNaPalavra(pos)
-        self.verificaSeTemContidos()
-        self.verificaSeTemIguais()
+    def __verificaSeEh2Palindromo__(self, pos):
+        self.__encontraTodosOsPalindromoNaPalavra__(pos)
+        self.__verificaSeTemContidos__()
+       # self.verificaSeTemIguais()
         length = len(self.palidromo1)
         if length >= 2:
             self.result.append((self.palavras[pos], True))
@@ -60,14 +60,14 @@ class Palindromo:
 
     def palindromar(self):
         result = ""
-        self.pegaPalavras()
+        self.__pegaPalavras__()
         length = len(self.palavras)
         for i in range(length):
             self.palidromo1 = []
-            self.verificaSeEh2Palindromo(i)
+            self.__verificaSeEh2Palindromo__(i)
         for i in self.result:
             if i[1]:
-                result += i[0] + " "
+                result += i[0] + " \n"
 
         print(result)
 
