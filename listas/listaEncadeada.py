@@ -3,9 +3,6 @@ class Node:
         self.data = initdata
         self.next = None
 
-    def __str__(self):
-        return f'[{self.data}]'
-
     def getData(self):
         return self.data
 
@@ -60,13 +57,6 @@ class UnorderedList:
 
         return found
 
-    def setHead(self, item):
-        self.head = item
-
-    def setTale(self, item):
-        if item.next:
-            item.next = None
-
     def remove(self, item):
         current = self.head
         previous = None
@@ -83,34 +73,32 @@ class UnorderedList:
         else:
             previous.setNext(current.getNext())
 
-    def getItemByPos(self, pos):
+    def inverteLista(self):
         current = self.head
         previous = None
-        for i in range(pos):
-            if current.getData():
-                if current.getNext():
-                    previous = current
-                    current = current.getNext()
-                else:
-                    raise IndexError
-            else:
-                raise IndexError
+        while current.getNext():
+            print(current.getData())
+            previous = current
+            current = current.getNext()
 
-        return current
+        current.setNext(previous)
+        self.head = current
+        
+        aux = curre
+
+
+        print(lista)
+        print("cheguei ao final")
 
 
 def inverterLista(lista):
-    if lista:
-        size = lista.size()
-        for i in range(size - 1, -1, -1):
-            if not i:
-                break
-            node = lista.getItemByPos(i)
-            if new_next := lista.getItemByPos(i - 1):
-                node.next = new_next
-        lista.setHead(lista.getItemByPos(size))
-        lista.setTale(lista.getItemByPos(0))
-    return lista
+    if L.isEmpty():
+        return None
+    if L.size() == 1:
+        return lista
+
+    L.inverteLista(lista)
+
 
 
 L = UnorderedList()
@@ -119,10 +107,6 @@ L.add(2)
 L.add(3)
 L.add(4)
 L.add(5)
-
-print(L.getItemByPos(3))
-
-
 print(f'Lista antes: {L}')
 L = inverterLista(L)
 print(f'Lista depois: {L}')
