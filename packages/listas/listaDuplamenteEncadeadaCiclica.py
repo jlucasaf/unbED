@@ -43,7 +43,23 @@ class ListaDuplamenteEncadeadaCiclica:
 
     def isEmpty(self):
         return self.head is None
+    
+    def search(self, item):
+        current = self.head
+        found = False
+        if current.getData() == item:
+            return True
+        else:
+            current = current.getNext()
 
+        while current != self.head and not found:
+            if current.getData() == item:
+                found = True
+            else:
+                current = current.getNext()
+
+        return found
+    
     def addInFront(self, item):  # adiciona no inicio da lista.
         temp = Node(item)
         if self.isEmpty():
@@ -104,6 +120,54 @@ class ListaDuplamenteEncadeadaCiclica:
 
         temp.getPrevious().next = temp
 
+    def removeFirst(self):
+        if self.isEmpty():
+            return None
+        if self.size() == 1:
+            self.head = None
+            return None
+
+        previous = self.head.previous
+        self.head = previous.next = self.head.next
+        self.head.previous = previous
+
+    def removeLast(self):
+        if self.isEmpty():
+            return None
+        if self.size() == 1:
+            self.head = None
+            return None
+
+        last = self.head.previous
+        previousLast = last.previous
+        self.head.previous = previousLast
+        previousLast.next = self.head
+
+    def removeItem(self, item):
+        if self.isEmpty():
+            return None
+
+        if not self.search(item):
+            return
+
+        pos = 0
+        temp = self.head
+
+        while temp.getData() is not item:
+            temp = temp.getNext()
+            pos += 1
+
+        if not pos:
+            return self.removeFirst()
+
+        if pos == self.size():
+            return self.removeLast()
+
+        temp.getNext().previous = temp.previous
+        temp.getPrevious().next = temp.next
+
+
+
     def size(self):
         if self.isEmpty():
             return 0
@@ -130,4 +194,10 @@ print(listaCiclica)
 listaCiclica.addInFinal(8)
 print(listaCiclica)
 listaCiclica.addInPosition(10, 4)
+print(listaCiclica)
+listaCiclica.removeFirst()
+print(listaCiclica)
+listaCiclica.removeLast()
+print(listaCiclica)
+listaCiclica.removeItem(2)
 print(listaCiclica)

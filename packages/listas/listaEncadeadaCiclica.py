@@ -16,14 +16,14 @@ class Node:
         self.next = newnext
 
 
-class UnorderedList:
+class UnorderedListCyclical:
     def __init__(self):
         self.head = None
 
     def __str__(self):
         tmp = self.head
         lstr = ''
-        while tmp != None:
+        while tmp != self.head:
             lstr += str(tmp.data) + ' '
             tmp = tmp.getNext()
 
@@ -32,6 +32,12 @@ class UnorderedList:
     def isEmpty(self):
         return self.head == None
 
+    def addFirst(self, item):
+        if(L.len() == 0):
+            temp = Node(item)
+            L.head = temp
+            L.next = None
+            
     def add(self, item):
         temp = Node(item)
         temp.setNext(self.head)
@@ -73,40 +79,14 @@ class UnorderedList:
         else:
             previous.setNext(current.getNext())
 
-    def inverteLista(self):
-        current = self.head
-        previous = None
-        while current.getNext():
-            print(current.getData())
-            previous = current
-            current = current.getNext()
-
-        current.setNext(previous)
-        self.head = current
-        
-        aux = curre
-
-
-        print(lista)
-        print("cheguei ao final")
-
-
-def inverterLista(lista):
-    if L.isEmpty():
-        return None
-    if L.size() == 1:
-        return lista
-
-    L.inverteLista(lista)
 
 
 
-L = UnorderedList()
+L = UnorderedListCyclical()
 L.add(1)
 L.add(2)
 L.add(3)
 L.add(4)
 L.add(5)
-print(f'Lista antes: {L}')
-L = inverterLista(L)
-print(f'Lista depois: {L}')
+
+print(L)

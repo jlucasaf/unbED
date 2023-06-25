@@ -112,7 +112,7 @@ class ListaDuplamenteEncadeada:
 
     def removeItem(self, item):
         if self.isEmpty():
-            return None
+            return
 
         if not self.search(item):
             return
