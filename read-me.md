@@ -17,10 +17,10 @@ neste repo.
   - [x] Lista encadeada cíclica
   - [x] Lista duplamente encadeada simples
   - [x] Lista duplamente encadeada cíclica
-- [ ] Pilha, fila e Deque
+- [x] Pilha, fila e Deque
   - [x] Pilha
-  - [ ] Fila
-  - [ ] Deque
+  - [x] Fila
+  - [x] Deque
 - [ ] Árvores
   - [ ] Árvores( geral )
   - [ ] Árvore Binária de Busca

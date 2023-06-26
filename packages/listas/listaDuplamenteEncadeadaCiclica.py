@@ -44,6 +44,28 @@ class ListaDuplamenteEncadeadaCiclica:
     def isEmpty(self):
         return self.head is None
     
+    def peek(self, itemPos):
+        aux = self.head
+        if itemPos - 1 > self.size():
+            return None
+        for i in range(itemPos):
+            aux = aux.getNext()
+
+        return aux.getData()
+    
+    def get_items(self):
+        items = []
+        
+        if size := self.size():
+            aux = self.head
+            for i in range(size):
+                items.append(aux)
+                aux = aux.getNext()
+            
+            return items
+        
+        return items
+    
     def search(self, item):
         current = self.head
         found = False
@@ -59,6 +81,11 @@ class ListaDuplamenteEncadeadaCiclica:
                 current = current.getNext()
 
         return found
+    
+    def firstItem(self):
+        if not self.size: 
+            return None
+        return self.head.getData()
     
     def addInFront(self, item):  # adiciona no inicio da lista.
         temp = Node(item)
@@ -89,6 +116,7 @@ class ListaDuplamenteEncadeadaCiclica:
         if self.size() == 1:
             self.head.next = self.head.previous = temp
             temp.previous = temp.next = self.head
+            return
 
         temp.next = self.head
         temp.previous = self.head.previous
@@ -123,25 +151,35 @@ class ListaDuplamenteEncadeadaCiclica:
     def removeFirst(self):
         if self.isEmpty():
             return None
+        
+        dado = self.head.getData()
+
         if self.size() == 1:
+            
             self.head = None
-            return None
+            return dado
 
         previous = self.head.previous
         self.head = previous.next = self.head.next
         self.head.previous = previous
+        return dado
 
     def removeLast(self):
         if self.isEmpty():
             return None
+        
+        dado = self.head.getPrevious().getData()
+
         if self.size() == 1:
             self.head = None
-            return None
+            return dado
 
         last = self.head.previous
         previousLast = last.previous
         self.head.previous = previousLast
         previousLast.next = self.head
+
+        return dado
 
     def removeItem(self, item):
         if self.isEmpty():
@@ -182,22 +220,3 @@ class ListaDuplamenteEncadeadaCiclica:
 
         return count
 
-
-listaCiclica = ListaDuplamenteEncadeadaCiclica()
-
-listaCiclica.addInFront(2)
-print(listaCiclica)
-listaCiclica.addInFront(3)
-print(listaCiclica)
-listaCiclica.addInFront(4)
-print(listaCiclica)
-listaCiclica.addInFinal(8)
-print(listaCiclica)
-listaCiclica.addInPosition(10, 4)
-print(listaCiclica)
-listaCiclica.removeFirst()
-print(listaCiclica)
-listaCiclica.removeLast()
-print(listaCiclica)
-listaCiclica.removeItem(2)
-print(listaCiclica)
