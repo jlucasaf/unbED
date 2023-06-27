@@ -21,8 +21,8 @@ neste repo.
   - [x] Pilha
   - [x] Fila
   - [x] Deque
-- [x] Árvores
-  - [x] Árvores( geral )
-  - [x] Árvore Binária de Busca 
+- [ ] Árvores
+  - [ ] Árvores( geral )
+  - [ ] Árvore Binária de Busca
 - [ ] Grafos
   
