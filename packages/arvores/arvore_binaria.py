@@ -2,54 +2,60 @@ class Node:
     def __init__(self, initData):
         self.data = initData
         self.dir = self.esq = None
-
-
+    def getData(self):
+        return self.data
+    
+    def get_dir(self):
+        return self.dir
+    
+    def get_esq(self):
+        return self.esq
+    
+    
 class ArvoreBinaria:
     def __init__(self):
         self.root = None
-
-    def insert(self, raiz,  item):
-        aux = Node(item)
-
+        self.travessia = []
+    def __insert__(self, raiz, no):
+        
         if not raiz:
-
-            return aux
-
-        if aux.data > raiz.data:
-            raiz.dir = self.insert(raiz.dir, item)
+            return no
+        
+        if no.getData() > raiz.getData():
+            raiz.dir = self.__insert__(raiz.dir, no)
         else:
-            raiz.esq = self.insert(raiz.esq, item)
-
+            raiz.esq = self.__insert__(raiz.esq, no)
+        
         return raiz
-
-    def travessia_pos(self, node):
+    
+    def __travessia_pos__(self, node):
         if node:
-            self.travessia_pos(node.esq)
-            self.travessia_pos(node.dir)
-            print(node.data)
-    def travessia_in(self, node):
+            self.__travessia_pos__(node.esq)
+            self.__travessia_pos__(node.dir)
+            self.travessia.append(node.data)
+    def __travessia_in__(self, node):
         if node:
-            self.travessia_in(node.esq)
-            print(node.data)
-            self.travessia_in(node.dir)
-
-    def travessia_pre(self, node):
+            self.__travessia_in__(node.esq)
+            self.travessia.append(node.data)
+            self.__travessia_in__(node.dir)
+    def __travessia_pre__(self, node):
         if node:
-            print(node.data)
-            self.travessia_pre(node.esq)
-            self.travessia_pre(node.dir)
-
-
-
-arvore = ArvoreBinaria()
-
-arvore.root = arvore.insert(arvore.root, 5)
-arvore.root = arvore.insert(arvore.root, 4)
-arvore.root = arvore.insert(arvore.root, 7)
-arvore.root = arvore.insert(arvore.root, 3)
-
-arvore.travessia_in(arvore.root)
-print("/" * 10)
-arvore.travessia_pos(arvore.root)
-print("/" * 10)
-arvore.travessia_pre(arvore.root)
+            self.travessia.append(node.data)
+            self.__travessia_pre__(node.esq)
+            self.__travessia_pre__(node.dir)
+    
+    def __imprimir_travessia__(self):
+        print(' '.join(str(f) for f in self.travessia))
+        self.travessia.clear()
+    def insert(self, item):
+        no = Node(item)
+        self.root = self.__insert__(self.root, no)
+    def travessia_pos(self):
+        self.__travessia_pos__(self.root)
+        self.__imprimir_travessia__()
+    def travessia_in(self):
+        self.__travessia_in__(self.root)
+        self.__imprimir_travessia__()
+    def travessia_pre(self):
+        self.__travessia_pre__(self.root)
+        self.__imprimir_travessia__()
