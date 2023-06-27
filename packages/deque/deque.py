@@ -4,6 +4,16 @@ class Deque:
     def __init__(self) -> None:
         self.auxList = ListaDuplamenteEncadeadaCiclica()
 
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Deque):
+            if self.size() == other.size():
+                for i in range(self.size()):
+                    if self.auxList.peek(i) != other.auxList.peek(i):
+                        return False
+                return True
+            return False
+        return False
+
     def __str__(self) -> str:
         return self.auxList.__str__()
 
@@ -15,6 +25,13 @@ class Deque:
     
     def search(self, item):
         return self.auxList.search(item)
+    
+    def reverse(self):
+        reversedDeque = Deque()
+        for i in range(self.auxList.size() - 1, -1, -1):
+            reversedDeque.push_back(self.auxList.peek(i))
+        return reversedDeque
+    
     
     def clear(self):
         self.auxList.head = None
