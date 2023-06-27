@@ -10,7 +10,7 @@ class Queue:
     def enqueue(self, item):
         self.auxList.addInFinal(item)
     
-    def dequeue(self, item):
+    def dequeue(self):
         return self.auxList.removeFirst()
     
     def peek(self, itemPos):
